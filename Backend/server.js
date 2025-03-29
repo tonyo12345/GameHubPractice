@@ -31,6 +31,81 @@ app.get('/games', async (req, res) => {
     }
 })
 
+app.post('/addgames', async (req, res) => {
+    try {
+        const sql = 'INSERT INTO games (title, description, category, release_date, platforms, thumbnail_url, game_url, developer, publisher, rating, tags, image_links) VALUES (?)'
+        const values = [
+            req.body.title,
+            req.body.description,
+            req.body.category,
+            req.body.release_date,
+            req.body.platforms,
+            req.body.thumbnail_url,
+            req.body.game_url,
+            req.body.developer,
+            req.body.publisher,
+            req.body.rating,
+            req.body.tags,
+            req.body.image_links
+        ]
+        
+        const [result] = await db.query(sql, [values]);
+        res.json(result);
+        console.log('Game inserted successfully:', result);
+    } catch (error) {
+        console.error('Error inserting game:', error);
+        res.status(500).json({ message: 'Error inserting game' });
+    }
+}
+);
+
+app.put('/updategames/:id', async (req, res) => {
+    try {
+        const gameId = req.params.id;
+        const sql = 'UPDATE games SET title = ?, description = ?, category = ?, release_date = ?, platforms = ?, thumbnail_url = ?, game_url = ?, developer = ?, publisher = ?, rating = ?, tags = ?, image_links = ? WHERE id = ?';
+        const values = [
+            req.body.title,
+            req.body.description,
+            req.body.category,
+            req.body.release_date,
+            req.body.platforms,
+            req.body.thumbnail_url,
+            req.body.game_url,
+            req.body.developer,
+            req.body.publisher,
+            req.body.rating,
+            req.body.tags,
+            req.body.image_links,
+            gameId
+        ];
+
+        const [result] = await db.query(sql, values);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Employee not found.' });
+        }
+        res.status(200).json({ message: 'Employee updated successfully.' });
+    } catch (error) {
+        console.error('Error updating game:', error);
+        res.status(500).json({ message: 'Error updating game' });
+    }
+});
+
+app.delete('/deletegames/:id', async (req, res) => {
+    try {
+        const gameId = req.params.id;
+        const sql = 'DELETE FROM games WHERE id = ?';
+        const [result] = await db.query(sql, [gameId]);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Game not found.' });
+        }
+        res.status(200).json({ message: 'Game deleted successfully.' });
+    } catch (error) {
+        console.error('Error deleting game:', error);
+        res.status(500).json({ message: 'Error deleting game' });
+    }
+}
+);
+
 app.listen(port, () => {
     console.log(`Server running on: http://localhost:${port}`)
 });
