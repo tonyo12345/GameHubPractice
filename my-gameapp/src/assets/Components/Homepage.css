@@ -1,0 +1,37 @@
+.hero-section h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3rem;
+  }
+  
+  .hero-section p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+  
+  .card {
+    border: 1px solid #444;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .animated.pulse {
+    animation: pulse 1s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  

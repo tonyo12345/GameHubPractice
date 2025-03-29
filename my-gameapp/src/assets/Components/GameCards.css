@@ -1,0 +1,17 @@
+/* styles.css */
+.card-body {
+    background-color: #2d2d2d; /* Darker card background */
+    border-radius: 10px; /* Rounded card body */
+  }
+  
+  .card-title {
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+  }
+  
+  .loading-text {
+    font-size: 1.5rem;
+  }

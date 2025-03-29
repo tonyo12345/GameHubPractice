@@ -1,0 +1,8 @@
+.filters-container {
+    margin-bottom: 20px;
+  }
+  
+  .filters-container .form-control,
+  .filters-container .form-select {
+    max-width: 100%;
+  }
